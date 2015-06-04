@@ -29,11 +29,12 @@ class ViewController: UIViewController {
     @IBAction func EnterDigit(sender: UIButton) {
         let digit = sender.currentTitle!
         if userIsInTheMiddleOfTypingANumber {
-            if (digit == ".") != floatPointIsAdded {
+            if (digit != ".") || !floatPointIsAdded {
                 display.text = display.text! + digit
             }
         } else {
-            display.text = digit
+            if digit == "." { display.text = "0." }
+            else { display.text = digit }
             userIsInTheMiddleOfTypingANumber = true
         }
         if digit == "." {
@@ -65,6 +66,19 @@ class ViewController: UIViewController {
         println("operandStack = \(operandStack)")
     }
     
+    private func reset() {
+        displayValue = 0
+        operandStack.removeAll(keepCapacity: false)
+        history.text = "History:"
+        userIsInTheMiddleOfTypingANumber = false
+        floatPointIsAdded = false
+        display.text = "0"
+    }
+    
+    
+    @IBAction func clear(sender: UIButton) {
+        reset()
+    }
     
     @IBAction func enter() {
         addHistory(display.text!)
