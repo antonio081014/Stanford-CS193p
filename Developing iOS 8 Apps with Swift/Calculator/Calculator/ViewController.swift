@@ -22,15 +22,21 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    var userIsInTheMiddleOfTypingANumber:Bool = false
+    var userIsInTheMiddleOfTypingANumber: Bool = false
+    var floatPointIsAdded: Bool = false
 
     @IBAction func EnterDigit(sender: UIButton) {
         let digit = sender.currentTitle!
         if userIsInTheMiddleOfTypingANumber {
-            display.text = display.text! + digit
+            if (digit == ".") != floatPointIsAdded {
+                display.text = display.text! + digit
+            }
         } else {
             display.text = digit
             userIsInTheMiddleOfTypingANumber = true
+        }
+        if digit == "." {
+            floatPointIsAdded = true
         }
     }
     
@@ -41,6 +47,7 @@ class ViewController: UIViewController {
         set {
             display.text = "\(newValue)"
             userIsInTheMiddleOfTypingANumber = false
+            floatPointIsAdded = false
         }
     }
     
@@ -49,6 +56,7 @@ class ViewController: UIViewController {
     
     @IBAction func enter() {
         userIsInTheMiddleOfTypingANumber = false
+        floatPointIsAdded = false
         operandStack.append(displayValue)
         println("operandStack = \(operandStack)")
     }
