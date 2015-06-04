@@ -77,7 +77,22 @@ class ViewController: UIViewController {
     
     @IBAction func backspace() {
         if userIsInTheMiddleOfTypingANumber {
+            if count(display.text!) > 0 {
+                if display.text![display.text!.endIndex.predecessor()] == "." {
+                    floatPointIsAdded = false
+                }
+                
+                display.text = dropLast(display.text!)
+                
+                if count(display.text!) == 0 {
+                    display.text = "0"
+                    userIsInTheMiddleOfTypingANumber = false
+                }
+            }
         } else {
+            if !operandStack.isEmpty {
+                operandStack.removeLast()
+            }
         }
     }
     
