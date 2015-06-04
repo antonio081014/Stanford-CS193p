@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var display: UILabel!
+    @IBOutlet weak var history: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,12 +54,21 @@ class ViewController: UIViewController {
     
     var operandStack = Array<Double>()
     
+    private func addHistory(operand: String) {
+        history.text = history.text! + " " + operand
+    }
     
-    @IBAction func enter() {
+    private func addOperand() {
         userIsInTheMiddleOfTypingANumber = false
         floatPointIsAdded = false
         operandStack.append(displayValue)
         println("operandStack = \(operandStack)")
+    }
+    
+    
+    @IBAction func enter() {
+        addHistory(display.text!)
+        addOperand()
     }
     
     @IBAction func operate(sender: UIButton) {
@@ -67,6 +77,7 @@ class ViewController: UIViewController {
         }
         
         if let operation = sender.currentTitle {
+            addHistory(operation)
             switch operation {
             case "×": performOperation { $0 * $1 }
             case "÷": performOperation { $1 / $0 }
@@ -84,14 +95,14 @@ class ViewController: UIViewController {
     private func performOperation(operation: (Double, Double) -> Double) {
         if operandStack.count >= 2 {
             displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
-            enter()
+            addOperand()
         }
     }
     
     private func performOperation(operation: Double -> Double) {
         if operandStack.count >= 1 {
             displayValue = operation(operandStack.removeLast())
-            enter()
+            addOperand()
         }
     }
     
