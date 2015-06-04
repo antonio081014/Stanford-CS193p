@@ -7,6 +7,7 @@ Stanford CS193p repo has ALL the homework I worked on on the [iTunes U Course] p
     * [Demo of Lecture 3, Calculator Brain]
     * [Demo of Lecture 5, Happiness]
     * [Programming Project 1, Calculator]
+    * Programming Project 1, Calculator with Extra Credit
     * Programming Project 2, Calculator Brain.
     * Programming Project 3, Graphing Calculator.
     * Programming Project 4, Smashtag Mentions.
