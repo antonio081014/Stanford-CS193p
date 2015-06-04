@@ -3,11 +3,15 @@
 Stanford CS193p repo has ALL the homework I worked on on the [iTunes U Course] provided by [Paul Hegaty from Stanford University]. 
 
   * [Developing iOS 8 Apps with Swift].
-    * Homework 1, Calculator.
+    * Demo of Lecture 2, Calculator.
+    * Demo of Lecture 3, Calculator Brain.
+    * Demo of Lecture 5, Happiness
+    * Programming Project 1, Calculator.
+    * Programming Project 2, Calculator Brain.
+    * Programming Project 3, Graphing Calculator.
+    * Programming Project 4, Smashtag Mentions.
+    * Programming Project 5, Animation.
   * [Developing iOS 7 Apps for iPhone and iPad].
-  
-### Version
-0.0.1
 
 
 License

@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		031D4BC11B201A9E0004EBE6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 031D4BBF1B201A9E0004EBE6 /* README.md */; };
-		031D4BC21B201A9E0004EBE6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 031D4BC01B201A9E0004EBE6 /* LICENSE */; };
+		031D4BC51B201C990004EBE6 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 031D4BC31B201C990004EBE6 /* README.md */; };
+		031D4BC61B201C990004EBE6 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 031D4BC41B201C990004EBE6 /* LICENSE */; };
 		96261F3E1A97BB740014F10A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96261F3D1A97BB740014F10A /* AppDelegate.swift */; };
 		96261F411A97BB740014F10A /* Calculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 96261F3F1A97BB740014F10A /* Calculator.xcdatamodeld */; };
 		96261F431A97BB740014F10A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96261F421A97BB740014F10A /* ViewController.swift */; };
@@ -29,8 +29,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		031D4BBF1B201A9E0004EBE6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = Calculator/README.md; sourceTree = "<group>"; };
-		031D4BC01B201A9E0004EBE6 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = Calculator/LICENSE; sourceTree = "<group>"; };
+		031D4BC31B201C990004EBE6 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
+		031D4BC41B201C990004EBE6 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };
 		96261F381A97BB740014F10A /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		96261F3C1A97BB740014F10A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96261F3D1A97BB740014F10A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,8 +65,8 @@
 		96261F2F1A97BB740014F10A = {
 			isa = PBXGroup;
 			children = (
-				031D4BBF1B201A9E0004EBE6 /* README.md */,
-				031D4BC01B201A9E0004EBE6 /* LICENSE */,
+				031D4BC31B201C990004EBE6 /* README.md */,
+				031D4BC41B201C990004EBE6 /* LICENSE */,
 				96261F3A1A97BB740014F10A /* Calculator */,
 				96261F531A97BB740014F10A /* CalculatorTests */,
 				96261F391A97BB740014F10A /* Products */,
@@ -211,8 +211,8 @@
 			files = (
 				96261F461A97BB740014F10A /* Main.storyboard in Resources */,
 				96261F4B1A97BB740014F10A /* LaunchScreen.xib in Resources */,
-				031D4BC21B201A9E0004EBE6 /* LICENSE in Resources */,
 				96261F481A97BB740014F10A /* Images.xcassets in Resources */,
+				031D4BC61B201C990004EBE6 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +232,7 @@
 			files = (
 				96261F431A97BB740014F10A /* ViewController.swift in Sources */,
 				96261F3E1A97BB740014F10A /* AppDelegate.swift in Sources */,
-				031D4BC11B201A9E0004EBE6 /* README.md in Sources */,
+				031D4BC51B201C990004EBE6 /* README.md in Sources */,
 				96261F411A97BB740014F10A /* Calculator.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
