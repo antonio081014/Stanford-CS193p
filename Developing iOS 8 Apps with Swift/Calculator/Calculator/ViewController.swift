@@ -75,6 +75,23 @@ class ViewController: UIViewController {
         display.text = "0"
     }
     
+    @IBAction func backspace() {
+        if userIsInTheMiddleOfTypingANumber {
+        } else {
+        }
+    }
+    
+    @IBAction func changeSign(sender: UIButton) {
+        if userIsInTheMiddleOfTypingANumber {
+            if display.text![display.text!.startIndex] == "-" {
+                display.text = display.text!.substringFromIndex(advance(display.text!.startIndex, 1))
+            } else {
+                display.text = "-" + display.text!
+            }
+        } else {
+            operate(sender)
+        }
+    }
     
     @IBAction func clear(sender: UIButton) {
         reset()
@@ -101,6 +118,7 @@ class ViewController: UIViewController {
             case "sin": performOperation {sin($0)}
             case "cos": performOperation {cos($0)}
             case "π": performOperation(M_PI)
+            case "±":performOperation {-1 * $0}
             default: break
             }
         }
@@ -123,6 +141,10 @@ class ViewController: UIViewController {
     private func performOperation(operand: Double) {
         displayValue = operand
         enter()
+    }
+    
+    private func performOperation() {
+        
     }
 }
 
