@@ -136,6 +136,8 @@ class ViewController: UIViewController {
             case "±":performOperation {-1 * $0}
             default: break
             }
+            
+            display.text = "=" + display.text!
         }
     }
     
@@ -156,10 +158,6 @@ class ViewController: UIViewController {
     private func performOperation(operand: Double) {
         displayValue = operand
         enter()
-    }
-    
-    private func performOperation() {
-        
     }
 }
 
