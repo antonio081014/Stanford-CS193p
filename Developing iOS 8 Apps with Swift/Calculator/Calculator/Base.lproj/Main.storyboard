@@ -264,7 +264,6 @@
                                 </state>
                                 <connections>
                                     <action selector="clear:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZE0-PD-iMi"/>
-                                    <action selector="operate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eUn-cL-UI0"/>
                                 </connections>
                             </button>
                         </subviews>

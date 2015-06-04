@@ -31,6 +31,8 @@ class ViewController: UIViewController {
         if userIsInTheMiddleOfTypingANumber {
             if (digit != ".") || !floatPointIsAdded {
                 display.text = display.text! + digit
+            } else {
+                displayValue = nil
             }
         } else {
             if digit == "." { display.text = "0." }
@@ -42,12 +44,21 @@ class ViewController: UIViewController {
         }
     }
     
-    var displayValue: Double {
+    var displayValue: Double? {
         get {
-            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue
+            if let displayText = display.text{
+                if let displayNumber = NSNumberFormatter().numberFromString(displayText) {
+                    return displayNumber.doubleValue
+                }
+            }
+            return nil
         }
         set {
-            display.text = "\(newValue)"
+            if newValue != nil {
+                display.text = "\(newValue!)"
+            } else {
+                display.text = "0"
+            }
             userIsInTheMiddleOfTypingANumber = false
             floatPointIsAdded = false
         }
@@ -62,17 +73,14 @@ class ViewController: UIViewController {
     private func addOperand() {
         userIsInTheMiddleOfTypingANumber = false
         floatPointIsAdded = false
-        operandStack.append(displayValue)
+        if let number = displayValue { operandStack.append(number) }
         println("operandStack = \(operandStack)")
     }
     
     private func reset() {
-        displayValue = 0
+        displayValue  = nil
         operandStack.removeAll(keepCapacity: false)
         history.text = "History:"
-        userIsInTheMiddleOfTypingANumber = false
-        floatPointIsAdded = false
-        display.text = "0"
     }
     
     @IBAction func backspace() {
@@ -85,8 +93,7 @@ class ViewController: UIViewController {
                 display.text = dropLast(display.text!)
                 
                 if count(display.text!) == 0 {
-                    display.text = "0"
-                    userIsInTheMiddleOfTypingANumber = false
+                    displayValue = nil
                 }
             }
         } else {
@@ -145,6 +152,8 @@ class ViewController: UIViewController {
         if operandStack.count >= 2 {
             displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
             addOperand()
+        } else {
+            displayValue = nil
         }
     }
     
@@ -152,6 +161,8 @@ class ViewController: UIViewController {
         if operandStack.count >= 1 {
             displayValue = operation(operandStack.removeLast())
             addOperand()
+        } else {
+            displayValue = nil
         }
     }
     
