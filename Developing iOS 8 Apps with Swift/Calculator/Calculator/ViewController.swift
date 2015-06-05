@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     
     var userIsInTheMiddleOfTypingANumber: Bool = false
     var floatPointIsAdded: Bool = false
+    
+    var brain = CalculatorBrain()
 
     @IBAction func EnterDigit(sender: UIButton) {
         let digit = sender.currentTitle!
@@ -64,23 +66,18 @@ class ViewController: UIViewController {
         }
     }
     
-    var operandStack = Array<Double>()
-    
-    private func addHistory(operand: String) {
-        history.text = history.text! + " " + operand
-    }
-    
     private func addOperand() {
         userIsInTheMiddleOfTypingANumber = false
         floatPointIsAdded = false
-        if let number = displayValue { operandStack.append(number) }
-        println("operandStack = \(operandStack)")
+        if let number = displayValue {
+            displayValue = brain.performOperand(number)
+        }
     }
     
     private func reset() {
         displayValue  = nil
-        operandStack.removeAll(keepCapacity: false)
-        history.text = "History:"
+        history.text = brain.history()
+        brain.reset()
     }
     
     @IBAction func backspace() {
@@ -97,9 +94,8 @@ class ViewController: UIViewController {
                 }
             }
         } else {
-            if !operandStack.isEmpty {
-                operandStack.removeLast()
-            }
+            brain.dropLast()
+            history.text = brain.history()
         }
     }
     
@@ -120,8 +116,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func enter() {
-        addHistory(display.text!)
         addOperand()
+        history.text = brain.history()
     }
     
     @IBAction func operate(sender: UIButton) {
@@ -130,45 +126,15 @@ class ViewController: UIViewController {
         }
         
         if let operation = sender.currentTitle {
-            addHistory(operation)
-            switch operation {
-            case "×": performOperation { $0 * $1 }
-            case "÷": performOperation { $1 / $0 }
-            case "+": performOperation { $0 + $1 }
-            case "−": performOperation { $1 - $0 }
-            case "√": performOperation { sqrt($0) }
-            case "sin": performOperation {sin($0)}
-            case "cos": performOperation {cos($0)}
-            case "π": performOperation(M_PI)
-            case "±":performOperation {-1 * $0}
-            default: break
-            }
-            
+            displayValue = brain.performOperation(operation)
             display.text = "=" + display.text!
+            history.text = brain.history()
         }
     }
     
-    private func performOperation(operation: (Double, Double) -> Double) {
-        if operandStack.count >= 2 {
-            displayValue = operation(operandStack.removeLast(), operandStack.removeLast())
-            addOperand()
-        } else {
-            displayValue = nil
-        }
-    }
-    
-    private func performOperation(operation: Double -> Double) {
-        if operandStack.count >= 1 {
-            displayValue = operation(operandStack.removeLast())
-            addOperand()
-        } else {
-            displayValue = nil
-        }
-    }
-    
-    private func performOperation(operand: Double) {
-        displayValue = operand
-        enter()
+    @IBAction func result(sender: UIButton) {
+        displayValue = brain.evaluate()
+        display.text = "=" + display.text!
     }
 }
 

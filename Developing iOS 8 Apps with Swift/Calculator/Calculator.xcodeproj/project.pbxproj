@@ -16,6 +16,7 @@
 		96261F481A97BB740014F10A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96261F471A97BB740014F10A /* Images.xcassets */; };
 		96261F4B1A97BB740014F10A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 96261F491A97BB740014F10A /* LaunchScreen.xib */; };
 		96261F571A97BB740014F10A /* CalculatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96261F561A97BB740014F10A /* CalculatorTests.swift */; };
+		96BF796E1B2223C1009994DB /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96BF796D1B2223C1009994DB /* CalculatorBrain.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		96261F501A97BB740014F10A /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		96261F551A97BB740014F10A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		96261F561A97BB740014F10A /* CalculatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculatorTests.swift; sourceTree = "<group>"; };
+		96BF796D1B2223C1009994DB /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,6 +89,7 @@
 			children = (
 				96261F421A97BB740014F10A /* ViewController.swift */,
 				96261F441A97BB740014F10A /* Main.storyboard */,
+				96BF796D1B2223C1009994DB /* CalculatorBrain.swift */,
 				96261F601A97BBAC0014F10A /* Core Data */,
 				96261F3B1A97BB740014F10A /* Supporting Files */,
 			);
@@ -233,6 +236,7 @@
 				96261F431A97BB740014F10A /* ViewController.swift in Sources */,
 				96261F3E1A97BB740014F10A /* AppDelegate.swift in Sources */,
 				031D4BC51B201C990004EBE6 /* README.md in Sources */,
+				96BF796E1B2223C1009994DB /* CalculatorBrain.swift in Sources */,
 				96261F411A97BB740014F10A /* Calculator.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
