@@ -77,10 +77,8 @@ class CalculatorBrain : Printable
             case .ConstantOperation(_, let operation):
                 return (operation(), remainingOps)
             case .Variable(let variable, let operation):
-                if contains(variableStack, variable) {
-                    if let number = variableValues[variable] {
-                        return (number, remainingOps)
-                    }
+                if let number = variableValues[variable] {
+                    return (number, remainingOps)
                 }
             }
         }
@@ -89,6 +87,7 @@ class CalculatorBrain : Printable
     
     func reset() {
         opStack.removeAll(keepCapacity: false)
+        variableValues.removeAll(keepCapacity: false)
     }
     
     func isEmpty() ->Bool {
@@ -129,12 +128,13 @@ class CalculatorBrain : Printable
     }
     
     func pushOperand(symbol: String) ->Double? {
-        variableStack.append(symbol)
+        opStack.append(Op.Variable(symbol, { () -> Double? in
+            return self.variableValues[symbol]
+        }))
         return evaluate()
     }
     
     var variableValues: Dictionary<String,Double>
-    private var variableStack = [String]()
     // brain.variableValues[“x”] = 35.0
     
     var description: String {

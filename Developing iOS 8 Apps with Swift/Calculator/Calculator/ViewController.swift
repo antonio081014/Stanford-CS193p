@@ -59,7 +59,7 @@ class ViewController: UIViewController {
             if newValue != nil {
                 display.text = "\(newValue!)"
             } else {
-                display.text = "0"
+                display.text = ""
             }
             userIsInTheMiddleOfTypingANumber = false
             floatPointIsAdded = false
@@ -137,6 +137,26 @@ class ViewController: UIViewController {
         display.text = "=" + display.text!
         
         println("Description: " + brain.description)
+    }
+    
+    @IBAction func setVariable(sender: UIButton) {
+        if displayValue != nil {
+            if let title = sender.currentTitle {
+                brain.variableValues[title.substringFromIndex(advance(title.startIndex, 1))] = displayValue
+            }
+            userIsInTheMiddleOfTypingANumber = false
+        }
+        displayValue = brain.evaluate()
+    }
+    
+    @IBAction func getVariable(sender: UIButton) {
+        if userIsInTheMiddleOfTypingANumber {
+            enter()
+        }
+        
+        if let title = sender.currentTitle {
+            displayValue = brain.pushOperand(title)
+        }
     }
 }
 
