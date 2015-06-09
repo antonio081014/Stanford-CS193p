@@ -8,13 +8,14 @@
 
 import Foundation
 
-class CalculatorBrain
+class CalculatorBrain : Printable
 {
     private enum Op : Printable {
         case Operand(Double)
         case UnaryOperation(String, Double ->Double)
         case BinaryOperation(String, (Double, Double) ->Double)
         case ConstantOperation(String, () ->Double)
+        case Variable(String, () ->Double?)
         
         var description: String {
             get {
@@ -23,6 +24,7 @@ class CalculatorBrain
                 case .UnaryOperation(let symbol, _): return symbol
                 case .BinaryOperation(let symbol, _): return symbol
                 case .ConstantOperation(let symbol, _): return symbol
+                case .Variable(let symbol, _): return symbol
                 }
             }
         }
@@ -33,6 +35,8 @@ class CalculatorBrain
     private var opStack = [Op]()
     
     init() {
+        variableValues = [String:Double]()
+        
         func learnOp(op: Op) {
             knownOps[op.description] = op
         }
@@ -46,6 +50,7 @@ class CalculatorBrain
         learnOp(Op.UnaryOperation("cos", cos))
         learnOp(Op.UnaryOperation("±") {-1 * $0})
         learnOp(Op.ConstantOperation("π") {M_PI})
+        
         
     }
     
@@ -71,6 +76,12 @@ class CalculatorBrain
                 }
             case .ConstantOperation(_, let operation):
                 return (operation(), remainingOps)
+            case .Variable(let variable, let operation):
+                if contains(variableStack, variable) {
+                    if let number = variableValues[variable] {
+                        return (number, remainingOps)
+                    }
+                }
             }
         }
         return (nil, ops)
@@ -115,5 +126,50 @@ class CalculatorBrain
     func performOperand(operand: Double) ->Double? {
         opStack.append(Op.Operand(operand))
         return evaluate()
+    }
+    
+    func pushOperand(symbol: String) ->Double? {
+        variableStack.append(symbol)
+        return evaluate()
+    }
+    
+    var variableValues: Dictionary<String,Double>
+    private var variableStack = [String]()
+    // brain.variableValues[“x”] = 35.0
+    
+    var description: String {
+        get {
+            if let content = descriptionOfEvaluation(opStack).result { return content }
+            return ""
+        }
+    }
+    
+    private func descriptionOfEvaluation(ops: [Op]) ->(result: String?, remainingOps: [Op]) {
+        if !ops.isEmpty {
+            var remainingOps = ops
+            let op = remainingOps.removeLast()
+            switch op {
+            case .Operand(let operand):
+                return (op.description, remainingOps)
+            case .UnaryOperation(let symbol, _):
+                let operandDescription = descriptionOfEvaluation(remainingOps)
+                if let result = operandDescription.result {
+                    return (op.description + "(" + result + ")", operandDescription.remainingOps)
+                }
+            case .BinaryOperation(let symbol, _):
+                let op1Description = descriptionOfEvaluation(remainingOps)
+                if let description1 = op1Description.result {
+                    let op2Description = descriptionOfEvaluation(op1Description.remainingOps)
+                    if let description2 = op2Description.result {
+                        return ("(" + description1 + ")" + op.description + "(" + description2 + ")", op2Description.remainingOps)
+                    }
+                }
+            case .Variable(let symbol, _):
+                return (op.description, remainingOps)
+            case .ConstantOperation(let symbol, _):
+                return (op.description, remainingOps)
+            }
+        }
+        return (nil, ops)
     }
 }

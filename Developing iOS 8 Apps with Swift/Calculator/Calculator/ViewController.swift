@@ -135,6 +135,8 @@ class ViewController: UIViewController {
     @IBAction func result(sender: UIButton) {
         displayValue = brain.evaluate()
         display.text = "=" + display.text!
+        
+        println("Description: " + brain.description)
     }
 }
 
