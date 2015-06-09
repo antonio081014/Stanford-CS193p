@@ -139,8 +139,15 @@ class CalculatorBrain : Printable
     
     var description: String {
         get {
-            if let content = descriptionOfEvaluation(opStack).result { return content }
-            return ""
+            var contentDescription = descriptionOfEvaluation(opStack)
+            var ret = contentDescription.result!
+            
+            while !contentDescription.remainingOps.isEmpty {
+                contentDescription = descriptionOfEvaluation(contentDescription.remainingOps)
+                ret = contentDescription.result! + "," + ret
+            }
+            
+            return ret
         }
     }
     
@@ -161,7 +168,7 @@ class CalculatorBrain : Printable
                 if let description1 = op1Description.result {
                     let op2Description = descriptionOfEvaluation(op1Description.remainingOps)
                     if let description2 = op2Description.result {
-                        return ("(" + description1 + ")" + op.description + "(" + description2 + ")", op2Description.remainingOps)
+                        return ("(" + description2 + " " + op.description + " " + description1 + ")", op2Description.remainingOps)
                     }
                 }
             case .Variable(let symbol, _):
@@ -170,6 +177,6 @@ class CalculatorBrain : Printable
                 return (op.description, remainingOps)
             }
         }
-        return (nil, ops)
+        return ("?", ops)
     }
 }

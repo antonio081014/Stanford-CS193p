@@ -76,8 +76,8 @@ class ViewController: UIViewController {
     
     private func reset() {
         displayValue  = nil
-        history.text = brain.history()
         brain.reset()
+        history.text = brain.history()
     }
     
     @IBAction func backspace() {
